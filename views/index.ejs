@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1><%= title %></h1>
+  <ul class="users-list">
+    <% users.forEach(user => { %>
+      <li><%= user.name %></li>
+    <% }) %>
+    <% if (users.length === 0) { %>
+      <li>No users found</li>
+    <% } %>
+  </ul>
+</body>
+</html>
