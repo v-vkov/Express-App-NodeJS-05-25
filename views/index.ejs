@@ -1,18 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title><%= title %></title>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
   <link rel="stylesheet" href="/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h1><%= title %></h1>
-  <ul class="users-list">
-    <% users.forEach(user => { %>
-      <li><%= user.name %></li>
-    <% }) %>
-    <% if (users.length === 0) { %>
-      <li>No users found</li>
-    <% } %>
-  </ul>
+  <div class="app">
+    <header class="header">
+      <div class="logo">My Store</div>
+      <nav class="nav">
+        <a href="/users" class="nav-link">Users</a>
+        <a href="/products" class="nav-link">Products</a>
+        <a href="/orders" class="nav-link">Orders</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="card">
+        <h1 class="title">Admin Dashboard</h1>
+        <p class="subtitle">
+          Обери розділ для переходу:
+        </p>
+
+        <div class="btn-group">
+          <a href="/users" class="btn primary">Users</a>
+          <a href="/products" class="btn">Products</a>
+          <a href="/orders" class="btn">Orders</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© <%= new Date().getFullYear() %> My Store</span>
+    </footer>
+  </div>
 </body>
 </html>
