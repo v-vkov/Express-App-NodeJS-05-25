@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-const PORT = 3000; // 8080 5000 3001
+const PORT = process.env.PORT || 3000; // 8080 5000 3001
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 const indexRouter = require('./api/index.router');
 
@@ -12,7 +13,7 @@ app.use(morgan('dev')); // log requests to the console
 app.use(express.json()); // parse json body
 app.use(express.urlencoded({ extended: true })); // parse url encoded body
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cookieParser());
 
 // ejs
 app.set('view engine', 'ejs');
