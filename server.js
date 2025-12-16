@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 3000; // 8080 5000 3001
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const indexRouter = require('./api/index.router');
 
@@ -14,6 +15,9 @@ app.use(express.json()); // parse json body
 app.use(express.urlencoded({ extended: true })); // parse url encoded body
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+app.use(cors({
+    origin: ['http://localhost:4000', 'https://www.my-product-shop.com']
+}));
 
 // ejs
 app.set('view engine', 'ejs');

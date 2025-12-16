@@ -4,7 +4,8 @@ const crypto = require('crypto')
 let products = [
     { id: 1, name: "iPhone 15", price: 999, image: "https://www.apple.com/v/iphone/home/cg/images/overview/select/iphone_17pro__0s6piftg70ym_large.jpg" },
     { id: 2, name: "Samsung Galaxy S24", price: 899, image: "https://images.samsung.com/ua/smartphones/galaxy-s24/images/galaxy-s24-highlights-kv.jpg" },
-    { id: 3, name: "Xiaomi 14 pro", price: 299, image: "https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-14t-pro/PC/1319.png" }
+    { id: 3, name: "Xiaomi 14 pro", price: 299, image: "https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-14t-pro/PC/1319.png" },
+    { id: 4, name: "Google Pixel 8", price: 799, image: "https://www.google.com/pixel/images/pixel8/hero_kv.jpg" }
 ]
 
 
