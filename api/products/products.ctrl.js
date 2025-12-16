@@ -2,14 +2,9 @@ const { randomUUID } = require('crypto');
 const crypto = require('crypto')
 
 let products = [
-    { id: 1, name: 'iPhone 15', price: 100, is_deleted: false },
-    { id: 2, name: 'MacBook Pro', price: 200, is_deleted: false },
-    { id: 3, name: 'iPad Pro', price: 300, is_deleted: true },
-    { id: 4, name: 'Apple Watch', price: 400, is_deleted: false },
-    { id: 5, name: 'AirPods', price: 500, is_deleted: false },
-    { id: 6, name: 'Apple TV', price: 600, is_deleted: false },
-    { id: 7, name: 'Apple Music', price: 700, is_deleted: false },
-    { id: 8, name: 'Apple News', price: 800, is_deleted: false }
+    { id: 1, name: "iPhone 15", price: 999, image: "https://www.apple.com/v/iphone/home/cg/images/overview/select/iphone_17pro__0s6piftg70ym_large.jpg" },
+    { id: 2, name: "Samsung Galaxy S24", price: 899, image: "https://images.samsung.com/ua/smartphones/galaxy-s24/images/galaxy-s24-highlights-kv.jpg" },
+    { id: 3, name: "Xiaomi 14 pro", price: 299, image: "https://i02.appmifile.com/mi-com-product/fly-birds/xiaomi-14t-pro/PC/1319.png" }
 ]
 
 
