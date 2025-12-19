@@ -3,8 +3,6 @@ const router = express.Router();
 const usersCtrl = require('./users.ctrl');
 const authMiddleware = require('../common/middlwares/auth');
 
-
-router.get('/', authMiddleware.checkAuth, usersCtrl.getUsers);
 router.get('/:id', authMiddleware.checkAuth, usersCtrl.getUserById);
 router.put('/:id', authMiddleware.checkAuth, usersCtrl.updateUser);
 router.delete('/:id', authMiddleware.checkAuth, usersCtrl.deleteUser);

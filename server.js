@@ -4,10 +4,13 @@ const PORT = process.env.PORT || 3000; // 8080 5000 3001
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const morgan = require('morgan');
 
 const indexRouter = require('./api/index.router');
+const connectDB = require('./config/db');
 
-const morgan = require('morgan');
+// Connect to MongoDB
+connectDB();
 
 // Middleware
 app.use(morgan('dev')); // log requests to the console
@@ -26,16 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/api', indexRouter);
 
 app.get('/', (req, res) => {
-    const data = {
-        title: 'Express',
-        users: [
-            { id: 1, name: 'John Doe' },
-            { id: 2, name: 'Jane Doe' },
-            { id: 3, name: 'John Smith' },
-            { id: 4, name: 'Jane Smith' }
-        ]
-    }
-    return res.render('index', data);
+    return res.render('index');
 });
 
 // Error handling middleware
