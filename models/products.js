@@ -1,5 +1,14 @@
 const mongoose = require('mongoose');
 
+const CATEGORIES = [
+    'electronics',
+    'clothing',
+    'books',
+    'food',
+    'furniture',
+    'other'
+];
+
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -12,6 +21,21 @@ const productSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true
+    }, 
+    categories: {
+        type: [String],
+        enum: CATEGORIES
+    }, 
+    description: {
+        type: String,
+    },
+    stock: {
+        type: Number,
+        required: true
+    },
+    isActive: {
+        type: Boolean,
+        default: true
     }
 }, { timestamps: true }); // createdAt updateAt
 
