@@ -8,6 +8,7 @@ const createProductSchema = joi.object({
 })
 
 const updateProductSchema = joi.object({
+    name: joi.string().min(3).max(100).optional(),
     price: joi.number().integer().min(1).optional(),
     updated_at: joi.date().default(new Date()).optional()
 })

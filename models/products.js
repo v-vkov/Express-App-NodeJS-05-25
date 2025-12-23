@@ -25,9 +25,10 @@ const productSchema = new mongoose.Schema({
     categories: {
         type: [String],
         enum: CATEGORIES
-    }, 
+    },
     description: {
         type: String,
+        default: 'No description available'
     },
     stock: {
         type: Number,
@@ -38,5 +39,6 @@ const productSchema = new mongoose.Schema({
         default: true
     }
 }, { timestamps: true }); // createdAt updateAt
+
 
 module.exports = mongoose.model('Product', productSchema, 'products');

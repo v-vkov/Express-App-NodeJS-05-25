@@ -28,13 +28,13 @@ const deleteUser = async (req, res) => {
 
     await UserModel.deleteOne({ _id: userId });
 
-    res.status(200).json({ data : `User deleted` });
+    return res.status(200).json({ data : `User deleted` });
 };
 
 const signUp = async (req, res) => {
     const { email, password, name, phone } = req.body;
 
-    const isExitingUser = await UserModel.findOne({ email: email });
+    const isExitingUser = await UserModel.findOne({ email: email }).select('-password');
 
     if (isExitingUser) {
         return res.status(400).json({ error: `Email already in use` });

@@ -47,9 +47,16 @@ const testOrders = async (req, res) => {
     //     scheduleDate: new Date()
     // });
 
-    // const result = await OrderModel.find({status: 'delivered', totalPrice: '200'}) // []
+    // $nor $not 
+    // const result = await OrderModel.find({
+    //     $nor: [ 
+    //         {status: 'delivered'}, 
+    //         {$and: [{isActive: true}, {status: 'shipped'}] },
+    //         {$and: [{isActive: false}, {status: 'completed'}] },
+    //     ]
+    // }) // []
 
-    // const result = await OrderModel.findOne({userId: new ObjectId('6945976581089d6df9a4cfb9')}) // {}
+    // const result = await OrderModel.findOne({_id: new ObjectId('69459e69d4d5c464f73c8f91')}) // {} found 5 = returned 1 
 
     // const result = await OrderModel.findById('69459e69d4d5c464f73c8f91') // {}
     
