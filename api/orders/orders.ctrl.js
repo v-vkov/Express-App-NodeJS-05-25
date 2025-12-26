@@ -1,21 +1,27 @@
 const OrderModel = require('../../models/orders');
+const ordersService = require('./orders.service');
 
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
 // get orders
-const getOrders = (req, res) => {
-    return res.status(200).json({ data: 'Orders list' });
+const getOrders = async (req, res) => {
+    const orders = await ordersService.getOrdersList(req.query);
+    return res.status(200).json({ data: orders });
 };
 
 // get order by id
-const getOrderById = (req, res) => {
-    return res.status(200).json({ data: 'Order by id' });
+const getOrderById = async (req, res) => {
+    const orderId = req.params.id;
+    const order = await ordersService.getOrderById(orderId);
+    return res.status(200).json({ data: order });
 };
 
 // create order
-const createOrder = (req, res) => {
-    return res.status(200).json({ data: 'Order created' });
+const createOrder = async (req, res) => {
+    const orderData = req.body;
+    const order = await ordersService.createOrder(orderData);
+    return res.status(201).json({ data: order });
 };
 
 const testOrders = async (req, res) => {
