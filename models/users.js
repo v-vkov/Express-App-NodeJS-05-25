@@ -24,4 +24,20 @@ const userSchema = new mongoose.Schema({
     }
 })
 
+userSchema.index({ email: 1 });
+
+userSchema.index({ 
+    email: 1, 
+    role: 1
+}, { unique: true, partialFilterExpression: { role: { $ne: 'guest' } } });
+
+// userSchema.index({
+//     email: 1,
+//     phone: 1
+// }, { unique: true, partialFilterExpression: { phone: { $exists: true } } });
+
+// userSchema.index({
+//     name: 1,
+// }, { unique: true, sparse: true });
+
 module.exports = mongoose.model('User', userSchema, 'users');

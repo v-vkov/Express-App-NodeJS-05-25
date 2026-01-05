@@ -41,4 +41,6 @@ const productSchema = new mongoose.Schema({
 }, { timestamps: true }); // createdAt updateAt
 
 
+productSchema.index({ isActive: 1 });
+
 module.exports = mongoose.model('Product', productSchema, 'products');

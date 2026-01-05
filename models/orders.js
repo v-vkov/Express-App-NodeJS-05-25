@@ -25,4 +25,7 @@ const orderSchema = new mongoose.Schema({
     }
   }, { timestamps: true }); // createdAt updateAt
 
+orderSchema.index({ userId: 1 });
+orderSchema.index({ status: 1 });
+
 module.exports = mongoose.model('Order', orderSchema, 'orders');

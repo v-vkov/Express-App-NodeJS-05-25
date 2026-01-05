@@ -10,6 +10,12 @@ const getOrders = async (req, res) => {
     return res.status(200).json({ data: orders });
 };
 
+const ordersAnalytics = async (req, res) => {
+    const userId = req.params.userId;
+    const analytics = await ordersService.getOrdersAnalytics(userId);
+    return res.status(200).json({ data: analytics });
+};
+
 // get order by id
 const getOrderById = async (req, res) => {
     const orderId = req.params.id;
@@ -71,6 +77,7 @@ const testOrders = async (req, res) => {
 
 module.exports = {
     getOrders,
+    ordersAnalytics,
     getOrderById,
     createOrder,
     testOrders
