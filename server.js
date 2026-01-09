@@ -7,6 +7,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const indexRouter = require('./api/index.router');
+const externalApiRouter = require('./external-api/index.router');
 const connectDB = require('./config/db');
 
 // Connect to MongoDB
@@ -14,7 +15,6 @@ connectDB();
 
 // Middleware
 app.use(morgan('dev')); // log requests to the console
-app.use(express.json()); // parse json body
 app.use(express.urlencoded({ extended: true })); // parse url encoded body
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
@@ -26,7 +26,8 @@ app.use(cors({
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use('/api', indexRouter);
+app.use('/api', express.json(), indexRouter);
+app.use('/external', externalApiRouter);
 
 app.get('/', (req, res) => {
     return res.render('index');

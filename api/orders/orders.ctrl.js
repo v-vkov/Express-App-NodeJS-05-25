@@ -1,6 +1,8 @@
 const OrderModel = require('../../models/orders');
 const ordersService = require('./orders.service');
 
+const stripeService = require('../../services/stripe');
+
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
@@ -27,7 +29,26 @@ const getOrderById = async (req, res) => {
 const createOrder = async (req, res) => {
     const orderData = req.body;
     const order = await ordersService.createOrder(orderData);
-    return res.status(201).json({ data: order });
+
+    const populatedProductsOrder = await OrderModel.findById(order._id).populate('products');
+
+    const productsList = populatedProductsOrder.products.map(product => {
+        return {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+                name: product.name,
+                images: [product.image]
+            },
+            unit_amount: product.price * 100
+          },
+          quantity: 1
+        }
+    });
+
+    const session = await stripeService.createSession(productsList, order._id.toString());
+
+    return res.status(201).json({ data: order, session: session.url });
 };
 
 const testOrders = async (req, res) => {
