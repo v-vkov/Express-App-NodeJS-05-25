@@ -2,6 +2,10 @@ const OrderModel = require('../../models/orders');
 const ordersService = require('./orders.service');
 
 const stripeService = require('../../services/stripe');
+const emailService = require('../../services/resend');
+
+const ejs = require('ejs');
+const path = require('path');
 
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
@@ -30,7 +34,7 @@ const createOrder = async (req, res) => {
     const orderData = req.body;
     const order = await ordersService.createOrder(orderData);
 
-    const populatedProductsOrder = await OrderModel.findById(order._id).populate('products');
+    const populatedProductsOrder = await OrderModel.findById(order._id).populate('products').populate('userId');
 
     const productsList = populatedProductsOrder.products.map(product => {
         return {
@@ -47,6 +51,24 @@ const createOrder = async (req, res) => {
     });
 
     const session = await stripeService.createSession(productsList, order._id.toString());
+
+    // send email to customer
+    const html = await ejs.renderFile(path.resolve('views/emails/order-recieved.ejs'), {
+        customerName: order.userId.name,
+        orderId: order._id.toString(),
+        etaText: '45-60 minutes',
+        deliveryAddress: '123 Main St, Anytown, USA',
+        supportEmail: 'support@example.com'
+    });
+
+    const emailResponce = await emailService.sendEmail(
+        'Acme <onboarding@resend.dev>',
+        ["rambambam72@gmail.com"],
+        'Order Recieved',
+        html
+    );
+
+    console.log('Email responce:', emailResponce);
 
     return res.status(201).json({ data: order, session: session.url });
 };

@@ -30,7 +30,13 @@ app.use('/api', express.json(), indexRouter);
 app.use('/external', externalApiRouter);
 
 app.get('/', (req, res) => {
-    return res.render('index');
+    return res.render('emails/order-recieved', {
+        customerName: 'Вікторія',
+        orderId: 'PS-2026-000124',
+        etaText: '45–60 хвилин',
+        deliveryAddress: 'м. Львів, вул. Шевченка, 12, кв. 34',
+        supportEmail: 'support@pizzastore.ua'
+      });
 });
 
 // Error handling middleware

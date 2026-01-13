@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const UserModel = require('../../models/users');
 
+const emailService = require('../../services/resend');
+
 const getUserById = async (req, res) => {
     const userId = req.params.id;
     const user = await UserModel.findById(userId);
@@ -48,6 +50,16 @@ const signUp = async (req, res) => {
         phone: phone,
         password: hash
     });
+
+    // send welcome email
+    const data = await emailService.sendEmail(
+        'Acme <onboarding@resend.dev>',
+        ['rambambam72@gmail.com'],
+        'Welcome To Vika shop',
+        '<strong>Welcome to Vika Shop</strong>'
+    );
+
+    console.log('Email responce:', data);
 
     return res.status(201).json({ data: newUser });
 }
